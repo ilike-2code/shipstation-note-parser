@@ -1,0 +1,17 @@
+{
+    "require": {
+        "google/cloud-functions-framework": "^1.3",
+        "google/cloud-secret-manager": "^1.12"
+    },
+    "autoload": {
+        "classmap": [
+            "lib/"
+        ]
+    },
+    "scripts": {
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "FUNCTION_TARGET=run php -S localhost:${PORT:-8080} vendor/bin/router.php"
+        ]
+    }
+}

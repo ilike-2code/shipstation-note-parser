@@ -1,0 +1,26 @@
+name: PHP Lint CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+permissions:
+  contents: read
+
+jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@128a63446a954579617e875aaab7d2978154e969 # v2.4.0
+      with:
+        disable-sudo: true
+        egress-policy: block
+        allowed-endpoints: >
+          github.com:443
+
+    - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
+    - name: PHP-CS-Fixer
+      uses: docker://oskarstark/php-cs-fixer-ga:latest@sha256:27a50ce07cc06958526e4182b3ace3019cad50a5506df2e20ea190e83e931f11
+      with:
+        args: . --diff --dry-run
