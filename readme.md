@@ -47,3 +47,18 @@ gcloud functions deploy shipstation-note-parser \
 ```
 8. Get Cloud Function URL (either cloudfunctions.net or run.app)
 9. Create ShipStation webhook (On New Orders) with Cloud Function URL.
+
+## Testing
+```
+composer start
+```
+and
+```
+curl -X POST \
+-H "Content-Type: application/json" \
+-d '{"resource_url":"https://ssapi15.shipstatiocom/orders?importBatch=BATCH_ID","resource_type":"ORDER_NOTIFY"}' \
+http://localhost:8080
+```
+(Use a service like https://webhook.site to capture webhook POST data to test with)
+
+See: https://cloud.google.com/functions/docs/running/function-frameworks
