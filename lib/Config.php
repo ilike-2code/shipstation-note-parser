@@ -2,8 +2,7 @@
 
 class Config
 {
-	private static $instances = [];
-
+	private static $instance = null;
 	private array $config = [];
 
 	private function __construct($file_path)
@@ -15,14 +14,18 @@ class Config
 		$this->config = parse_ini_file($file_path);
 	}
 
-	public static function get($file_path)
+	public static function load($file_path)
 	{
-		$key = md5($file_path);
+		self::$instance = new self($file_path);
+		return self::get();
+	}
 
-		if (!isset(self::$instances[$key])) {
-			self::$instances[$key] = new self($file_path);
+	public static function get()
+	{
+		if (!self::$instance) {
+			throw new Exception("no config loaded");
 		}
 
-		return self::$instances[$key]->config;
+		return self::$instance->config;
 	}
 }

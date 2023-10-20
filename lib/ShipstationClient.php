@@ -3,12 +3,13 @@
 class ShipstationClient
 {
 	private Secret $secret; 
-
-	const BASE_URL = "https://ssapi15.shipstation.com";
+	private $base_url;
 
 	public function __construct(Secret $secret)
 	{
 		$this->secret = $secret;
+		$config = Config::get();
+		$this->base_url = $config['shipstation_base_url'];
 	}
 
 	public function getResource($url)
@@ -18,7 +19,7 @@ class ShipstationClient
 
 	public function createOrUpdateOrder($order)
 	{
-		$url = self::BASE_URL . "/orders/createorder";
+		$url = $this->base_url . "/orders/createorder";
 		return $this->request($url, "post", $order);
 	}
 

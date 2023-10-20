@@ -9,7 +9,7 @@ FunctionsFramework::http('run', 'run');
 
 function run(ServerRequestInterface $request): string
 {	
-	$config = Config::get(__DIR__ . "/config.ini");
+	$config = Config::load(__DIR__ . "/config.ini");
 
 	$body = json_decode($request->getBody()->getContents(), true);
 	$resource_url = $body["resource_url"] ?? null;
