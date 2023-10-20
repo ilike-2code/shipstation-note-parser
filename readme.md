@@ -5,7 +5,7 @@ order notes and order attributes are merged into a single field.
 This unmerges them.
 
 Uses Shipstation webhook to process orders as they are imported.  
-Removes order attributes from "Note from Buyer".
+Removes order attributes from "Note from Buyer".  
 Adds order attributes to "Custom Field 1"
 
 **Before:**
