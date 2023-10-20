@@ -35,16 +35,10 @@ function run(ServerRequestInterface $request): string
 
 	foreach ($orders as $order) {
 		$original_note = $order['customerNotes'] ?? "";
-		$note_parts = explode("<br/>", $original_note, 2);
-		$note = $note_parts[0] ?? "";
-		$extra = $note_parts[1] ?? "";
-
-		if ($note == "null") {
-			$note = "";
-		}
-
-		$order['customerNotes'] = $note;
-		$order['advancedOptions']['customField1'] = $extra;
+		$parser = new NoteParser();
+		$parser->parse($original_note);
+		$order['customerNotes'] = $parser->getNote();
+		$order['advancedOptions']['customField1'] = $parser->getExtra();
 		$shipstation_client->createOrUpdateOrder($order);
 	}
 

@@ -13,5 +13,8 @@
             "Composer\\Config::disableProcessTimeout",
             "FUNCTION_TARGET=run php -S localhost:${PORT:-8080} vendor/bin/router.php"
         ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.4"
     }
 }
