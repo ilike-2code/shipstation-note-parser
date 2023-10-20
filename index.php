@@ -38,11 +38,14 @@ function run(ServerRequestInterface $request): string
 		$note_parts = explode("<br/>", $original_note, 2);
 		$note = $note_parts[0] ?? null;
 		$extra = $note_parts[1] ?? null;
-		if ($note && $note !== "null") {
-			$order['customerNotes'] = $note;
-			$order['advancedOptions']['customField1'] = $extra;
-			$shipstation_client->createOrUpdateOrder($order);
+
+		if ($note === "null") {
+			$note = "";
 		}
+
+		$order['customerNotes'] = $note;
+		$order['advancedOptions']['customField1'] = $extra;
+		$shipstation_client->createOrUpdateOrder($order);
 	}
 
 	Logger::info(
