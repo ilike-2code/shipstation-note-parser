@@ -54,6 +54,11 @@ gcloud functions deploy shipstation-note-parser \
 8. Get Cloud Function URL (either cloudfunctions.net or run.app)
 9. Create ShipStation webhook (On New Orders) with Cloud Function URL.
 
+## Tests
+```shell
+composer test
+```
+
 ## Dev
 Run Functions Framework  
 https://cloud.google.com/functions/docs/running/function-frameworks
