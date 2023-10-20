@@ -19,13 +19,13 @@ Note From Buyer: Special Note 4 U
 Custom Field 1: internal-track-data: 123abc
 ```
 
-## Tech:
+## Tech
 - Google Cloud Functions
 - Google Secret Manager
 - ShipStation Webhooks 
 - ShipStation API
 
-## Prereqs:
+## Prereqs
 - `gcloud` cli: https://cloud.google.com/sdk/gcloud
 
 ## Setup
