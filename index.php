@@ -36,10 +36,10 @@ function run(ServerRequestInterface $request): string
 	foreach ($orders as $order) {
 		$original_note = $order['customerNotes'] ?? "";
 		$note_parts = explode("<br/>", $original_note, 2);
-		$note = $note_parts[0] ?? null;
-		$extra = $note_parts[1] ?? null;
+		$note = $note_parts[0] ?? "";
+		$extra = $note_parts[1] ?? "";
 
-		if ($note === "null") {
+		if ($note == "null") {
 			$note = "";
 		}
 
