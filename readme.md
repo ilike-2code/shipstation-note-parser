@@ -25,7 +25,7 @@ Custom Field 1: internal-track-data: 123abc
 - ShipStation Webhooks 
 - ShipStation API
 
-## Dependencies:
+## Prereqs:
 - `gcloud` cli: https://cloud.google.com/sdk/gcloud
 
 ## Setup
