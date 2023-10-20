@@ -25,7 +25,7 @@ function run(ServerRequestInterface $request): string
 		$config['shipstation_secret_version']
 	);
 
-	$shipstation_client = new ShipstationClient($secret);
+	$shipstation_client = new ShipStation($secret);
 	$resource = $shipstation_client->getResource($resource_url);
 	$orders = $resource['orders'] ?? [];
 	if (!$orders) {

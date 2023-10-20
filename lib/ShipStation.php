@@ -1,6 +1,6 @@
 <?php 
 
-class ShipstationClient
+class ShipStation
 {
 	private Secret $secret; 
 	private $base_url;
