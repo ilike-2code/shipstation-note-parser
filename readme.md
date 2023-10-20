@@ -1,21 +1,20 @@
 # ShipStation Note Parser
-
 When orders are synced from Shopify to Shipstation,  
 order notes and order attributes are merged into a single field.
 
-This unseperates them.
+This unmerges them.
 
-Uses Shipstation's ORDER_NOTIFY webhook to process orders as they are imported.  
-Removes order attributes from "Note from Buyer" field and puts them in "Custom Field 1"
+Uses Shipstation webhook to process orders as they are imported.  
+Removes order attributes from "Note from Buyer".
+Adds order attributes to "Custom Field 1"
 
 **Before:**
-```
+```yaml
 Note From Buyer: Special Note 4 U<br \> internal-track-data: 123abc
 ```
 **After:**
-```
+```yaml
 Note From Buyer: Special Note 4 U
-...
 Custom Field 1: internal-track-data: 123abc
 ```
 
