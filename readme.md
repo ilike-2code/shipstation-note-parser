@@ -30,8 +30,8 @@ Custom Field 1: internal-track-data: 123abc
 ## Setup
 1. Clone repo
 2. Generate ShipStation API key
-3. Create new Google Secret with API key (secret value format should be `key:secret`)
-```
+3. Create new Google Secret to store ShipStation API key (secret format: `key:secret`)
+```shell
 gcloud secrets create shipstation-key \
 --replication-policy="automatic"
 
@@ -42,7 +42,7 @@ gcloud secrets versions add secret-id --data-file=-
 5. Update `config.ini` with project_id, secret_name, version
 6. Update `config.ini` with ShipStation base URL
 7. Deploy cloud function (replace PROJECT, REGION)
-```
+```shell
 gcloud functions deploy shipstation-note-parser \
 --gen2 \
 --project PROJECT \
@@ -58,14 +58,14 @@ gcloud functions deploy shipstation-note-parser \
 Run Functions Framework  
 https://cloud.google.com/functions/docs/running/function-frameworks
 
-```
+```shell
 composer start
 ```
 
 Call function  
 (Use a service like https://webhook.site to capture webhook POST data to test with)
 
-```
+```shell
 curl -X POST \
 -H "Content-Type: application/json" \
 -d '{"resource_url":"URL","resource_type":"ORDER_NOTIFY"}' \
