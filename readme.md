@@ -10,7 +10,7 @@ Adds order attributes to "Custom Field 1"
 
 **Before:**
 ```yaml
-Note From Buyer: Special Note 4 U<br \> internal-track-data: 123abc
+Note From Buyer: Special Note 4 U<br\> internal-track-data: 123abc
 ```
 **After:**
 ```yaml
