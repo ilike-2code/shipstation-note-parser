@@ -9,8 +9,16 @@ FunctionsFramework::http('run', 'run');
 
 function run(ServerRequestInterface $request): string
 {	
-	$config = Config::load(__DIR__ . "/config.ini");
+	$env = getenv('env');
+	if (!$env) {
+		Logger::error("no env set");
+		return '';
+	}
 
+	$config = Config::load(__DIR__ . "/config.ini", $env);
+	print_r($config);
+
+	die();
 	$body = json_decode($request->getBody()->getContents(), true);
 	$resource_url = $body["resource_url"] ?? null;
 
