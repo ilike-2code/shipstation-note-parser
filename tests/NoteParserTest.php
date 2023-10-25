@@ -7,23 +7,47 @@ class NoteParserTest extends TestCase
     /**
      * @dataProvider parseDataProvider
      */    
-    public function testParse($original, $expected_note, $expected_extra) 
+    public function testParse($original, $note, $extra) 
     {    
         $parser = new NoteParser();
         $parser->parse($original);
-        $this->assertEquals($expected_note, $parser->getNote());
-        $this->assertEquals($expected_extra, $parser->getExtra());
+        $this->assertEquals($note, $parser->getNote());
+        $this->assertEquals($extra, $parser->getExtra());
     }
 
     public static function parseDataProvider()
     {
         return [
-            ['special note 4 u<br/>tracking', 'special note 4 u', 'tracking'],
-            ['<br/>tracking <br/> more tracking', '', 'tracking <br/> more tracking'],
-            ['null<br/>tracking', '', 'tracking'],
-            ['<br/>tracking', '', 'tracking'],
-            ['howdy', 'howdy', ''],
-            ['', '', ''],
+            [
+                'original' => 'special note 4 u<br/>tracking',
+                'note' => 'special note 4 u',
+                'extra' => 'tracking'
+            ],
+            [
+                'original' => '<br/>tracking <br/> more tracking',
+                'note' => '',
+                'extra' => 'tracking <br/> more tracking',
+            ],
+            [
+                'original' => 'null<br/>tracking',
+                'note' =>  '',
+                'extra' => 'tracking',
+            ],
+            [
+                'original' => '<br/>tracking',
+                'note' =>  '',
+                'extra' => 'tracking',
+            ],
+            [
+                'original' => 'howdy',
+                'note' => 'howdy',
+                'extra' => '',
+            ],
+            [
+                'original' => '',
+                'note' => '',
+                'extra' => '',
+            ],
         ];
     }
 }
