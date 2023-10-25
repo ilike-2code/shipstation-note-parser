@@ -9,10 +9,10 @@ FunctionsFramework::http('run', 'run');
 
 function run(ServerRequestInterface $request): string
 {
-	$context = [];
-	Logger::info('starting', $context);
-
 	$config = Config::load(__DIR__ . "/config.ini");
+
+	$context['cloud_function_name'] = $config['cloud_function_name'];
+	Logger::info('starting', $context);
 
 	$body = json_decode($request->getBody()->getContents(), true);
 	$resource_url = $body["resource_url"] ?? null;
