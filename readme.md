@@ -5,8 +5,8 @@ order notes and order attributes are merged into a single field.
 This unmerges them.
 
 Uses Shipstation webhook to process orders as they are imported.  
-Removes order attributes from "Note from Buyer".  
-Adds order attributes to "Custom Field 1"
+Parses order note and saves to "Note from Buyer".  
+Copies orignal note to "Custom Field 1".
 
 **Before:**
 ```yaml
@@ -15,7 +15,7 @@ Note From Buyer: Special Note 4 U<br\> internal-track-data: 123abc
 **After:**
 ```yaml
 Note From Buyer: Special Note 4 U
-Custom Field 1: internal-track-data: 123abc
+Custom Field 1: Special Note 4 U<br\> internal-track-data: 123abc
 ```
 
 ## Tech

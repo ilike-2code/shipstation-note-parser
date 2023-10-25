@@ -52,7 +52,7 @@ function run(ServerRequestInterface $request): string
 		$parser = new NoteParser();
 		$parser->parse($original_note);
 		$order['customerNotes'] = $parser->getNote();
-		$order['advancedOptions']['customField1'] = $parser->getExtra();
+		$order['advancedOptions']['customField1'] = $original_note;
 		$shipstation_client->createOrUpdateOrder($order);
 
 		Logger::info("updated order $order_id" , $context);
