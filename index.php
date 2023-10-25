@@ -17,7 +17,7 @@ function run(ServerRequestInterface $request): string
 	$body = json_decode($request->getBody()->getContents(), true);
 	$resource_url = $body["resource_url"] ?? null;
 
-	$context['body'] = $body
+	$context['body'] = $body;
 	Logger::info('parsing request', $context);
 
 	if (!$resource_url) {
@@ -42,7 +42,7 @@ function run(ServerRequestInterface $request): string
 		return '';
 	}
 
-	$context['order_count'] => count($orders);
+	$context['order_count'] = count($orders);
 	Logger::info('processing orders', $context);
 
 	foreach ($orders as $order) {
