@@ -17,7 +17,7 @@ function run(ServerRequestInterface $request): string
 	$body = json_decode($request->getBody()->getContents(), true);
 	$resource_url = $body["resource_url"] ?? null;
 
-	$context['body'] = $body;
+	$context['request_body'] = $body;
 	Logger::info('parsing request', $context);
 
 	if (!$resource_url) {
@@ -42,8 +42,9 @@ function run(ServerRequestInterface $request): string
 		return '';
 	}
 
-	$context['order_count'] = count($orders);
-	Logger::info('processing orders', $context);
+	$order_count = count($orders);
+	$context['order_count'] = $order_count;
+	Logger::info("processing $order_count order(s)", $context);
 
 	foreach ($orders as $order) {
 		$order_id = $order['orderId'];
@@ -54,7 +55,7 @@ function run(ServerRequestInterface $request): string
 		$order['advancedOptions']['customField1'] = $parser->getExtra();
 		$shipstation_client->createOrUpdateOrder($order);
 
-		Logger::info('updated order ' . $order_id , $context);
+		Logger::info("updated order $order_id" , $context);
 	}
 
 	Logger::info('complete', $context);
