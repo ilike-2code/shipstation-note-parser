@@ -8,7 +8,7 @@ use Psr\Http\Message\ServerRequestInterface;
 FunctionsFramework::http('run', 'run');
 
 function run(ServerRequestInterface $request): string
-{	
+{
 	$config = Config::load(__DIR__ . "/config.ini");
 
 	$body = json_decode($request->getBody()->getContents(), true);
@@ -20,8 +20,8 @@ function run(ServerRequestInterface $request): string
 	}
 
 	$secret = new Secret(
-		$config['project_id'], 
-		$config['shipstation_secret_id'], 
+		$config['project_id'],
+		$config['shipstation_secret_id'],
 		$config['shipstation_secret_version']
 	);
 
@@ -43,7 +43,7 @@ function run(ServerRequestInterface $request): string
 	}
 
 	Logger::info(
-		"success", 
+		"success",
 		["count" => count($orders)]
 	);
 

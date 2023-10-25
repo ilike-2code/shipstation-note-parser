@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-class Logger 
+class Logger
 {
 	const INFO = "info";
 	const ERROR = "error";
@@ -9,12 +9,12 @@ class Logger
 
 	public static function info(string $msg, array $context = []): void
 	{
-		self::log($msg, $context, self::INFO);		
+		self::log($msg, $context, self::INFO);
 	}
 
 	public static function error(string $msg, array $context = []): void
 	{
-		self::log($msg, $context, self::ERROR);		
+		self::log($msg, $context, self::ERROR);
 	}
 
 	private static function log(string $msg, array $context, string $level): void
