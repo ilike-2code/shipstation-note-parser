@@ -9,15 +9,24 @@ FunctionsFramework::http('run', 'run');
 
 function run(ServerRequestInterface $request): string
 {
+	$context = [];
+	Logger::info('starting', $context);
+
 	$config = Config::load(__DIR__ . "/config.ini");
 
 	$body = json_decode($request->getBody()->getContents(), true);
 	$resource_url = $body["resource_url"] ?? null;
 
+	$context['body'] = $body
+	Logger::info('parsing request', $context);
+
 	if (!$resource_url) {
 		Logger::error("no resource_url");
 		return '';
 	}
+
+	$context['resource_url'] = $resource_url;
+	Logger::info('checking resource', $context);
 
 	$secret = new Secret(
 		$config['project_id'],
@@ -33,19 +42,22 @@ function run(ServerRequestInterface $request): string
 		return '';
 	}
 
+	$context['order_count'] => count($orders);
+	Logger::info('processing orders', $context);
+
 	foreach ($orders as $order) {
+		$order_id = $order['orderId'];
 		$original_note = $order['customerNotes'] ?? "";
 		$parser = new NoteParser();
 		$parser->parse($original_note);
 		$order['customerNotes'] = $parser->getNote();
 		$order['advancedOptions']['customField1'] = $parser->getExtra();
 		$shipstation_client->createOrUpdateOrder($order);
+
+		Logger::info('updated order ' . $order_id , $context);
 	}
 
-	Logger::info(
-		"success",
-		["count" => count($orders)]
-	);
+	Logger::info('complete', $context);
 
 	return "ok";
 }
