@@ -16,9 +16,7 @@ function run(ServerRequestInterface $request): string
 	}
 
 	$config = Config::load(__DIR__ . "/config.ini", $env);
-	print_r($config);
 
-	die();
 	$body = json_decode($request->getBody()->getContents(), true);
 	$resource_url = $body["resource_url"] ?? null;
 
