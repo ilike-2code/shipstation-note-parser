@@ -55,7 +55,11 @@ function run(ServerRequestInterface $request): string
 		$order['advancedOptions']['customField1'] = $original_note;
 		$shipstation_client->createOrUpdateOrder($order);
 
-		Logger::info("updated order $order_id" , $context);
+		$order_context = array_merge($context, [
+			"note_original" => $original_note,
+			"note_parsed" => $parser->getNote(),
+		]);
+		Logger::info("updated order $order_id" , $order_context);
 	}
 
 	Logger::info('complete', $context);
