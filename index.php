@@ -53,13 +53,19 @@ function run(ServerRequestInterface $request): string
 		$parser->parse($original_note);
 		$order['customerNotes'] = $parser->getNote();
 		$order['advancedOptions']['customField1'] = $original_note;
-		$shipstation_client->createOrUpdateOrder($order);
-
-		$order_context = array_merge($context, [
-			"note_original" => $original_note,
-			"note_parsed" => $parser->getNote(),
-		]);
-		Logger::info("updated order $order_id" , $order_context);
+		try {
+			$shipstation_client->createOrUpdateOrder($order);
+			$order_context = array_merge($context, [
+				"note_original" => $original_note,
+				"note_parsed" => $parser->getNote(),
+			]);
+			Logger::info("updated order $order_id" , $order_context);
+		} catch (Exception $e) {
+			$error_context = array_merge($context, [
+				"error_message" => $e->getMessage()
+			]);
+			Logger::error("error updating order $order_id", $error_context);
+		}
 	}
 
 	Logger::info('complete', $context);

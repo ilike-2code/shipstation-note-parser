@@ -39,9 +39,14 @@ class ShipStation
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));	
 		}
 
-		$result = curl_exec($ch);
+		$response = curl_exec($ch);
+		$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		if (!$response || ($status_code < 200 || $status_code >= 300)) {
+			$error_msg = "status: $status_code error: " . curl_error($ch) . " code: " .  curl_errno($ch);
+			throw new Exception($error_msg);
+		}
 		curl_close ($ch);
 
-		return json_decode($result, true);
+		return json_decode($response, true);
 	}
 }
