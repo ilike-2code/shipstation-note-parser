@@ -18,7 +18,7 @@ class NoteParser
 
 	public function getNote(): string
 	{
-		return $this->note;
+		return $this->note ?? " ";
 	}
 
 	public function getExtra(): string
