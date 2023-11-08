@@ -25,17 +25,17 @@ class NoteParserTest extends TestCase
             ],
             [
                 'original' => '<br/>tracking <br/> more tracking',
-                'note' => '',
+                'note' => ' ',
                 'extra' => 'tracking <br/> more tracking',
             ],
             [
                 'original' => 'null<br/>tracking',
-                'note' =>  '',
+                'note' =>  ' ',
                 'extra' => 'tracking',
             ],
             [
                 'original' => '<br/>tracking',
-                'note' =>  '',
+                'note' =>  ' ',
                 'extra' => 'tracking',
             ],
             [
@@ -45,7 +45,7 @@ class NoteParserTest extends TestCase
             ],
             [
                 'original' => '',
-                'note' => '',
+                'note' => ' ',
                 'extra' => '',
             ],
         ];

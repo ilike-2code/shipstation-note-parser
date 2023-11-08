@@ -14,11 +14,14 @@ class NoteParser
 		if ($this->note == "null") {
 			$this->note = "";
 		}
+		if ($this->note === "") {
+			$this->note = " ";
+		}
 	}
 
 	public function getNote(): string
 	{
-		return $this->note ?? " ";
+		return $this->note;
 	}
 
 	public function getExtra(): string
