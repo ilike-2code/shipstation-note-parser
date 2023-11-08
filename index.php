@@ -54,10 +54,11 @@ function run(ServerRequestInterface $request): string
 		$order['customerNotes'] = $parser->getNote();
 		$order['advancedOptions']['customField1'] = $original_note;
 		try {
-			$shipstation_client->createOrUpdateOrder($order);
+			$response = $shipstation_client->createOrUpdateOrder($order);
 			$order_context = array_merge($context, [
 				"note_original" => $original_note,
 				"note_parsed" => $parser->getNote(),
+				"note_response" => $response['customerNotes'] ?? "undefined",
 			]);
 			Logger::info("updated order $order_id" , $order_context);
 		} catch (Exception $e) {
